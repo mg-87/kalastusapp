@@ -202,7 +202,6 @@
             border-bottom: none;
         }
         
-        /* Lokikirjan kortit ja toimintonapit */
         .log-item {
             background-color: #0f172a;
             border: 1px solid var(--border-color);
@@ -240,18 +239,11 @@
             background-color: #3b82f6;
             color: white;
         }
-        .btn-edit:hover {
-            background-color: #2563eb;
-        }
         .btn-delete {
             background-color: #ef4444;
             color: white;
         }
-        .btn-delete:hover {
-            background-color: #dc2626;
-        }
 
-        /* Leaflet popup dark theme fixes */
         .leaflet-popup-content-wrapper, .leaflet-popup-tip {
             background-color: #1e293b !important;
             color: #f8fafc !important;
@@ -382,7 +374,6 @@
             <button class="species-btn" onclick="openSpecies('hauki')"><span>Hauki</span> <span>&rarr;</span></button>
         </div>
 
-        <!-- Tekijänoikeus / Oikeudet -->
         <div class="footer-rights">
             &copy; Pasin kala äppi. Kaikki oikeudet pidätetään.
         </div>
@@ -427,6 +418,9 @@
 </div>
 
 <script>
+    // Google Drive Web App -osoite
+    const DRIVE_WEB_APP_URL = "https://script.google.com/macros/s/AKfycby2mfKjTkJah_QPuR9ypIfopxYABYdDR1LmcgLhfUr0-_y2ihsgA11L-jZB0BrFIJZ3yg/exec";
+
     let globalData = null;
     let globalLocationName = "";
     let currentPressureVal = 1013;
@@ -527,7 +521,7 @@
         }
     }
 
-    function saveCatchToMap() {
+    async function saveCatchToMap() {
         const species = document.getElementById("catchSpecies").value;
         const weight = document.getElementById("catchWeight").value.trim() || "Ei ilmoitettu";
         const length = document.getElementById("catchLength").value.trim() || "Ei ilmoitettu";
@@ -537,6 +531,26 @@
         const now = new Date();
         const dateStr = now.toLocaleDateString('fi-FI');
         const timeStr = now.toLocaleTimeString('fi-FI', { hour: '2-digit', minute: '2-digit' });
+
+        // Jos kuva on otettu, lähetetään se Google Driveen
+        if (tempImageBase64) {
+            document.getElementById("coordStatus").innerText = "☁️ Lähetetään kuvaa Google Driveen...";
+            try {
+                const payload = {
+                    base64Data: tempImageBase64,
+                    contentType: "image/jpeg",
+                    fileName: `Kala_${species}_${Date.now()}.jpg`
+                };
+                await fetch(DRIVE_WEB_APP_URL, {
+                    method: "POST",
+                    mode: "no-cors",
+                    headers: { "Content-Type": "text/plain;charset=utf-8" },
+                    body: JSON.stringify(payload)
+                });
+            } catch (err) {
+                console.error("Virhe Driven kuvansiirrossa:", err);
+            }
+        }
 
         const newCatch = {
             id: Date.now(),
@@ -566,7 +580,7 @@
         document.getElementById("catchLure").value = "";
         document.getElementById("preview-img").style.display = "none";
         tempImageBase64 = "";
-        document.getElementById("coordStatus").innerText = "✓ Saalis tallennettu lokikirjaan & kartalle!";
+        document.getElementById("coordStatus").innerText = "✓ Saalis tallennettu & kuva viety Driveen!";
 
         loadCatchesFromStorage();
     }
@@ -856,17 +870,11 @@
         document.getElementById("species-current-pressure").innerText = `${currentPressureVal} hPa | Tuuli: ${currentWindVal} m/s (${currentWindDirText})${waterStr}`;
         document.getElementById("species-title").innerText = `Täsmätiedot: ${species.charAt(0).toUpperCase() + species.slice(1)}`;
 
-        const month = new Date().getMonth() + 1; // 1-12
+        const month = new Date().getMonth() + 1;
         let seasonText = "";
         let locText = "";
         let actionText = "";
         let colorText = "";
-
-        // Vuodenaikalogiikka kuukausien mukaan (1-12)
-        // Talvi: 12, 1, 2
-        // Kevät / Kutu: 3, 4, 5
-        // Kesä: 6, 7, 8
-        // Syksy: 9, 10, 11
 
         if (species === 'ahven') {
             if (month >= 3 && month <= 5) {
