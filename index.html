@@ -730,7 +730,7 @@
                                     <span>${item.species || 'Tuntematon kala'}</span>
                                     <span style="font-size: 11px; color: #0284c7; background: #e0f2fe; padding: 2px 6px; border-radius: 6px;">${fishermanText}</span>
                                 </div>
-                                <div>⚖️ Paino: <strong>${item.weight} kg</strong> ${item.lenght ? `| 📏 Pituus: <strong>${item.lenght} cm</strong>` : ''}</div>
+                                <div>⚖️ Paino: <strong>${item.weight} kg</strong> ${item.length ? `| 📏 Pituus: <strong>${item.length} cm</strong>` : ''}</div>
                                 <div>🔽 Ilmanpaine: ${item.pressure ? item.pressure + ' hPa' : 'Ei tietoa'}</div>
                                 <div style="font-size: 10px; color: #94a3b8; margin-top: 2px;">🕒 ${dateStr}</div>
                             </div>
@@ -957,7 +957,7 @@
                 fisherman: fisherman || "Anonyymi",
                 species: species,
                 weight: parseFloat(weight),
-                lenght: length ? parseFloat(length) : null,
+                length: length ? parseFloat(length) : null,
                 image_url: imageUrl,
                 pressure: globalForecastData && globalForecastData.current ? Math.round(globalForecastData.current.surface_pressure) : 1013,
                 created_at: new Date().toISOString()
@@ -985,7 +985,7 @@
 
             } catch (err) {
                 console.error("Tietokantavirhe:", err);
-                alert("Saaliin tallennus epäonnistui. Varmista että Supabasessa on 'fisherman' sarake (F12).");
+                alert("Saaliin tallennus epäonnistui.");
             }
         }
     </script>
