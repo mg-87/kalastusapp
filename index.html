@@ -832,7 +832,9 @@
                 });
 
                 if (!response.ok) {
-                    throw new Error("Tallennus tietokantaan epäonnistui");
+                    const errorText = await response.text();
+                    console.error("Tarkka Supabase-virhe:", errorText);
+                    throw new Error("Tallennus epäonnistui: " + errorText);
                 }
 
                 alert("Saalis tallennettu onnistuneesti pilveen!");
@@ -840,7 +842,7 @@
 
             } catch (err) {
                 console.error("Tietokantavirhe:", err);
-                alert("Saaliin tallennus tietokantaan epäonnistui.");
+                alert("Saaliin tallennus epäonnistui. Katso konsoli (F12).");
             }
         }
     </script>
