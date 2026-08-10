@@ -386,6 +386,21 @@
             </div>
         </div>
 
+        <!-- YHTEISÖN SAALIIT - OSIO -->
+        <div class="card" style="border-left: 3px solid var(--accent-orange);">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+                <div style="font-weight: bold; color: var(--accent-orange);">👥 Yhteisön saaliit & Vinkit</div>
+                <button class="secondary-btn" onclick="loadCommunityCatches()" style="width: auto; padding: 4px 8px; font-size: 0.75rem;">Päivitä feedi</button>
+            </div>
+            <div style="font-size: 0.8rem; color: var(--text-muted); margin-bottom: 12px;">
+                Porukan viimeisimmät yhteiset reissut, ottipelit ja saalislöydöt.
+            </div>
+            
+            <div id="community-feed-container">
+                <div style="font-size: 0.85rem; color: var(--text-muted); text-align: center; padding: 10px;">Ladataan yhteisön saaliita...</div>
+            </div>
+        </div>
+
         <div id="species-menu" class="hidden">
             <div style="font-weight: bold; color: var(--text-muted); font-size: 0.9rem; margin-bottom: 8px;">Lajikohtaiset täsmätiedot:</div>
             <button class="species-btn" onclick="openSpecies('ahven')"><span>Ahven</span> <span>&rarr;</span></button>
@@ -456,6 +471,7 @@
     window.onload = function() {
         initMap(60.1699, 24.9384, 10);
         loadCatchesFromStorage();
+        loadCommunityCatches();
         updateSolunarCalendar();
 
         const savedCity = localStorage.getItem("kalapaine_city");
@@ -605,6 +621,7 @@
         document.getElementById("coordStatus").innerText = "✓ Saalis tallennettu & kuva viety Driveen!";
 
         loadCatchesFromStorage();
+        loadCommunityCatches();
     }
 
     function clearCatchLog() {
@@ -719,6 +736,37 @@
             &bull; Tehokkain uistimesi tähän mennessä: <b>${topLure}</b>.<br>
             &bull; Keskimääräinen ottipaine: <b>~${avgPressure} hPa</b>. Sovellus havaitsee aktiivisuuden korostuva näissä painelukemissa!
         `;
+    }
+
+    function loadCommunityCatches() {
+        const communityContainer = document.getElementById("community-feed-container");
+        let catches = JSON.parse(localStorage.getItem("kalapaine_catches") || "[]");
+
+        if (catches.length === 0) {
+            communityContainer.innerHTML = `<div style="font-size: 0.85rem; color: var(--text-muted); text-align: center; padding: 10px;">Ei yhteisön saaliita vielä. Kun porukka tallentaa kaloja, ne näkyvät täällä!</div>`;
+            return;
+        }
+
+        let feedHtml = "";
+        // Näytetään yhteisön syötteessä viimeisimmät saaliit
+        catches.slice().reverse().forEach(c => {
+            const imgHtml = c.image ? `<br><img src="${c.image}" style="max-width:100px; border-radius:4px; margin-top:6px;" />` : "";
+            feedHtml += `
+                <div class="log-item" style="border-left: 3px solid var(--accent-orange);">
+                    <div class="log-header">
+                        <span style="color: var(--accent-orange);">🐟 ${c.species} (${c.weight} / ${c.length})</span>
+                        <span style="font-size:0.75rem; color:var(--text-muted);">${c.date}</span>
+                    </div>
+                    <div class="log-details">
+                        <b>Syvyys:</b> ${c.depth} &bull; <b>Uistin:</b> ${c.lure}<br>
+                        <b>Ottipaine:</b> ${c.pressure} hPa &bull; Sää: ${c.temp} °C
+                        ${imgHtml}
+                    </div>
+                </div>
+            `;
+        });
+
+        communityContainer.innerHTML = feedHtml;
     }
 
     function handleKeyPress(event) {
