@@ -349,7 +349,7 @@
 
             <!-- Salasana-kenttä -->
             <div class="form-group">
-                <label>Sovelluksen salasana (vaaditaan tallennukseen):</label>
+                <label>Sovelluksen salasana (tarkistetaan palvelimella):</label>
                 <input type="password" id="catchPassword" placeholder="Syötä salasana">
             </div>
 
@@ -550,9 +550,9 @@
     }
 
     async function saveCatchToMap() {
-        const passwordInput = document.getElementById("catchPassword").value;
-        if (typeof APP_CONFIG === 'undefined' || passwordInput !== APP_CONFIG.PASSWORD) {
-            alert("Virheellinen salasana! Et voi tallentaa saalista ilman oikeaa salasanaa.");
+        const passwordInput = document.getElementById("catchPassword").value.trim();
+        if (!passwordInput) {
+            alert("Syötä salasana ennen tallennusta!");
             return;
         }
 
@@ -566,23 +566,28 @@
         const dateStr = now.toLocaleDateString('fi-FI');
         const timeStr = now.toLocaleTimeString('fi-FI', { hour: '2-digit', minute: '2-digit' });
 
-        if (tempImageBase64) {
-            document.getElementById("coordStatus").innerText = "☁️ Lähetetään kuvaa Google Driveen...";
-            try {
-                const payload = {
-                    base64Data: tempImageBase64,
-                    contentType: "image/jpeg",
-                    fileName: `Kala_${species}_${Date.now()}.jpg`
-                };
-                await fetch(APP_CONFIG.DRIVE_WEB_APP_URL, {
-                    method: "POST",
-                    mode: "no-cors",
-                    headers: { "Content-Type": "text/plain;charset=utf-8" },
-                    body: JSON.stringify(payload)
-                });
-            } catch (err) {
-                console.error("Virhe Driven kuvansiirrossa:", err);
-            }
+        document.getElementById("coordStatus").innerText = "☁️ Lähetetään tiedot ja tarkistetaan salasana...";
+
+        try {
+            const payload = {
+                password: passwordInput,
+                base64Data: tempImageBase64 || "",
+                contentType: "image/jpeg",
+                fileName: `Kala_${species}_${Date.now()}.jpg`,
+                species: species,
+                weight: weight,
+                length: length,
+                depth: depth,
+                lure: lure
+            };
+            await fetch(APP_CONFIG.DRIVE_WEB_APP_URL, {
+                method: "POST",
+                mode: "no-cors",
+                headers: { "Content-Type": "text/plain;charset=utf-8" },
+                body: JSON.stringify(payload)
+            });
+        } catch (err) {
+            console.error("Virhe Driven siirrossa:", err);
         }
 
         const newCatch = {
@@ -614,7 +619,7 @@
         document.getElementById("catchPassword").value = "";
         document.getElementById("preview-img").style.display = "none";
         tempImageBase64 = "";
-        document.getElementById("coordStatus").innerText = "✓ Saalis tallennettu & kuva viety Driveen!";
+        document.getElementById("coordStatus").innerText = "✓ Saalis tallennettu paikallisesti ja lähetetty Driveen!";
 
         loadCatchesFromStorage();
         loadCommunityCatches();
@@ -903,7 +908,6 @@
             }
         }
 
-        // Ottihetki-arviointi logiikka
         let pulseText = "Normaali ottihetki";
         let pulseColor = "#38bdf8";
         if (currentTrendStatus === "matala" || trendText.includes("Laskeva")) {
