@@ -58,13 +58,13 @@
             top: 0;
             left: 0;
             width: 100%;
-            height: calc(100% - 110px);
+            height: calc(100% - 65px);
             background: #ffffff;
             z-index: 5;
             display: none;
             flex-direction: column;
             overflow-y: auto;
-            padding: 15px 15px 20px 15px;
+            padding: 15px 15px 80px 15px;
         }
 
         .view-section.active-view {
@@ -76,13 +76,13 @@
             top: 0;
             left: 0;
             right: 0;
-            background: rgba(255, 255, 255, 0.95);
-            padding: 8px 12px;
+            background: rgba(255, 255, 255, 0.96);
+            padding: 10px 14px;
             border-bottom-left-radius: 20px;
             border-bottom-right-radius: 20px;
             display: flex;
             flex-direction: column;
-            gap: 5px;
+            gap: 7px;
             box-shadow: 0 4px 15px rgba(0,0,0,0.1);
             z-index: 10;
             backdrop-filter: blur(5px);
@@ -100,18 +100,38 @@
         .gps-row {
             font-weight: 500;
             border-bottom: 1px solid #e5e7eb;
-            padding-bottom: 4px;
+            padding-bottom: 6px;
         }
 
         .gps-btn {
             background: #e0f2fe;
             color: #0369a1;
             border: none;
-            padding: 3px 8px;
+            padding: 4px 9px;
             border-radius: 10px;
             font-size: 10px;
             font-weight: bold;
             cursor: pointer;
+        }
+
+        .bottom-back-btn {
+            position: absolute;
+            bottom: 75px;
+            left: 15px;
+            z-index: 20;
+            background: #e0f2fe;
+            color: #0369a1;
+            border: none;
+            padding: 8px 14px;
+            border-radius: 12px;
+            font-size: 12px;
+            font-weight: bold;
+            cursor: pointer;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+        }
+
+        .bottom-back-btn:active {
+            transform: scale(0.95);
         }
 
         .manual-input-container {
@@ -121,7 +141,7 @@
         }
 
         .manual-input {
-            padding: 2px 6px;
+            padding: 3px 6px;
             font-size: 10px;
             border: 1px solid #d1d5db;
             border-radius: 6px;
@@ -130,19 +150,19 @@
 
         .weather-info-box {
             background: #f1f5f9;
-            padding: 2px 6px;
+            padding: 4px 8px;
             border-radius: 6px;
             font-weight: 500;
-            font-size: 10px;
+            font-size: 11px;
         }
 
         .solunar-row {
             background: #e0f2fe;
             color: #0369a1;
-            padding: 4px 8px;
+            padding: 6px 10px;
             border-radius: 8px;
             font-weight: bold;
-            font-size: 10px;
+            font-size: 11px;
         }
 
         .clickable-forecast-row {
@@ -159,15 +179,15 @@
             background: #f8fafc;
             border: 1px solid #cbd5e1;
             color: #0f4c81;
-            padding: 4px 8px;
+            padding: 6px 10px;
             border-radius: 8px;
-            font-size: 10px;
+            font-size: 11px;
             font-weight: bold;
             text-align: center;
             justify-content: center;
         }
 
-        .catch-modal, .species-modal, .forecast-modal, .image-modal {
+        .catch-modal, .forecast-modal, .image-modal {
             position: absolute;
             top: 0;
             left: 0;
@@ -192,7 +212,7 @@
             max-height: 88vh;
             border-top-left-radius: 24px;
             border-top-right-radius: 24px;
-            padding: 20px 20px 90px 20px;
+            padding: 35px 20px 90px 20px; /* Siirretty ylätilaa alemmas, jotta otsikko ei mene reunaan */
             overflow-y: auto;
             box-shadow: 0 -10px 25px rgba(0,0,0,0.2);
             animation: slideUp 0.3s ease-out;
@@ -228,7 +248,7 @@
         }
 
         .form-group {
-            margin-bottom: 14px;
+            margin-bottom: 12px;
         }
 
         .form-group label {
@@ -236,12 +256,12 @@
             font-size: 11px;
             font-weight: bold;
             color: #4b5563;
-            margin-bottom: 4px;
+            margin-bottom: 3px;
         }
 
         .form-group input, .form-group select {
             width: 100%;
-            padding: 10px;
+            padding: 8px 10px;
             border: 1px solid #d1d5db;
             border-radius: 8px;
             font-size: 13px;
@@ -252,7 +272,7 @@
             background: #e0f2fe;
             color: #0369a1;
             border: 2px dashed #0284c7;
-            padding: 14px;
+            padding: 12px;
             border-radius: 10px;
             text-align: center;
             font-weight: bold;
@@ -268,14 +288,25 @@
         .modal-buttons {
             display: flex;
             gap: 10px;
-            margin-top: 25px;
+            margin-top: 20px;
             margin-bottom: 20px;
         }
 
         .btn-save {
-            flex: 1;
+            flex: 2;
             background: #0f4c81;
             color: white;
+            border: none;
+            padding: 12px;
+            border-radius: 8px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .btn-back-modal {
+            flex: 1;
+            background: #e0f2fe;
+            color: #0369a1;
             border: none;
             padding: 12px;
             border-radius: 8px;
@@ -295,7 +326,7 @@
 
         .action-buttons {
             position: absolute;
-            bottom: 125px;
+            bottom: 80px;
             left: 0;
             right: 0;
             display: flex;
@@ -314,16 +345,16 @@
         }
 
         .btn-circle {
-            width: 60px;
-            height: 60px;
+            width: 55px;
+            height: 55px;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
             color: white;
-            font-size: 24px;
+            font-size: 22px;
             box-shadow: 0 6px 16px rgba(0,0,0,0.25);
-            margin-bottom: 6px;
+            margin-bottom: 4px;
             background-color: #0f4c81;
             transition: transform 0.1s;
         }
@@ -333,9 +364,9 @@
         .btn-label {
             background: #111827;
             color: white;
-            padding: 4px 10px;
+            padding: 3px 8px;
             border-radius: 12px;
-            font-size: 10px;
+            font-size: 9px;
             font-weight: bold;
             letter-spacing: 0.5px;
         }
@@ -345,30 +376,16 @@
             bottom: 0;
             left: 0;
             right: 0;
-            height: 110px;
+            height: 65px;
             background: #ffffff;
             display: flex;
-            flex-direction: column;
+            flex-direction: row;
+            justify-content: space-around;
+            align-items: center;
             border-top: 1px solid #e5e7eb;
             z-index: 10;
             box-shadow: 0 -4px 12px rgba(0,0,0,0.05);
-        }
-
-        .nav-row-1 {
-            display: flex;
-            justify-content: space-around;
-            align-items: center;
-            height: 55px;
-            border-bottom: 1px solid #f3f4f6;
-        }
-
-        .nav-row-2 {
-            display: flex;
-            justify-content: space-around;
-            align-items: center;
-            height: 55px;
-            background: #f8fafc;
-            padding: 0 12px;
+            padding: 0 5px;
         }
 
         .nav-item {
@@ -382,33 +399,11 @@
             cursor: pointer;
             background: none;
             border: none;
+            flex: 1;
         }
 
         .nav-item.active { color: #0f4c81; }
-        .nav-item svg { width: 20px; height: 20px; margin-bottom: 2px; fill: currentColor; }
-
-        .nav-item-species {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            text-decoration: none;
-            color: #6b7280;
-            font-size: 10px;
-            font-weight: 500;
-            background: none;
-            border: none;
-            cursor: pointer;
-            width: 100%;
-        }
-
-        .nav-item-species svg {
-            width: 20px;
-            height: 20px;
-            margin-bottom: 2px;
-            fill: currentColor;
-        }
-
-        .nav-item-species:hover { color: #0f4c81; }
+        .nav-item svg { width: 22px; height: 22px; margin-bottom: 2px; fill: currentColor; }
 
         .species-list {
             display: grid;
@@ -420,7 +415,7 @@
         .species-option-btn {
             background: #f1f5f9;
             border: 1px solid #cbd5e1;
-            padding: 12px;
+            padding: 14px;
             border-radius: 10px;
             text-align: left;
             font-weight: bold;
@@ -430,6 +425,7 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
+            transition: background 0.2s;
         }
 
         .species-option-btn:hover {
@@ -478,6 +474,32 @@
             display: flex;
             justify-content: space-between;
         }
+
+        .detail-card {
+            background: #f8fafc;
+            border: 1px solid #cbd5e1;
+            border-radius: 10px;
+            padding: 12px;
+            margin-bottom: 12px;
+        }
+        .detail-card h4 {
+            color: #0f4c81;
+            font-size: 13px;
+            margin-bottom: 4px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        .realtime-badge {
+            background: #dbeafe;
+            color: #1e40af;
+            padding: 6px 10px;
+            border-radius: 8px;
+            font-size: 11px;
+            font-weight: bold;
+            margin-bottom: 12px;
+            border: 1px solid #bfdbfe;
+        }
     </style>
 </head>
 <body>
@@ -488,30 +510,88 @@
             <div id="map" style="width:100%; height:100%;"></div>
         </div>
 
-        <!-- Lokikirjanäkymä -->
+        <!-- Lokikirjan pääsivu -->
         <div id="logbookView" class="view-section">
-            <h2 style="color: #0f4c81; margin-bottom: 15px; font-size: 18px;">📖 Saalisarkisto (Lokikirja)</h2>
-            <div id="logbookList">
-                <p style="color: #6b7280; font-size: 13px;">Ladataan saaliita...</p>
+            <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 15px;">
+                <div style="width: 50px;"></div>
+                <h2 style="color: #0f4c81; font-size: 16px; margin: 0;">📖 Lokikirja</h2>
+                <div style="width: 50px;"></div>
             </div>
+            <p style="font-size: 12px; color: #6b7280; margin-bottom: 15px;">Valitse kala nähdäksesi kyseisen lajin saaliit, tiedot ja kuvat:</p>
+            <div class="species-list">
+                <button class="species-option-btn" onclick="openLogbookSpecies('Hauki')"><span>🐟 Hauki</span> <span>›</span></button>
+                <button class="species-option-btn" onclick="openLogbookSpecies('Kuha')"><span>🐟 Kuha</span> <span>›</span></button>
+                <button class="species-option-btn" onclick="openLogbookSpecies('Ahven')"><span>🐟 Ahven</span> <span>›</span></button>
+            </div>
+            <button class="bottom-back-btn" onclick="switchView('map')">‹ Takaisin</button>
         </div>
 
-        <!-- Feed-näkymä -->
+        <!-- Kalakohtainen sivunäkymä lokikirjalle -->
+        <div id="logbookSpeciesView" class="view-section">
+            <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 15px;">
+                <div style="width: 50px;"></div>
+                <h2 id="logbookSpeciesTitle" style="color: #0f4c81; font-size: 16px; margin: 0;">Kalat</h2>
+                <div style="width: 50px;"></div>
+            </div>
+            <div id="logbookSpeciesList">
+                <p style="color: #6b7280; font-size: 13px;">Ladataan saaliita...</p>
+            </div>
+            <button class="bottom-back-btn" onclick="switchView('logbook')">‹ Takaisin</button>
+        </div>
+
+        <!-- Kalat-pääsivu -->
+        <div id="speciesMainView" class="view-section">
+            <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 15px;">
+                <div style="width: 50px;"></div>
+                <h2 style="color: #0f4c81; font-size: 16px; margin: 0;">🐟 Kalat - Täsmätiedot</h2>
+                <div style="width: 50px;"></div>
+            </div>
+            <p style="font-size: 12px; color: #6b7280; margin-bottom: 15px;">Valitse kala nähdäksesi reaaliaikaiset taktiset ohjeet, suositellut vieheet ja värit vallitsevan sään mukaan:</p>
+            <div class="species-list">
+                <button class="species-option-btn" onclick="openSpeciesDataView('Hauki')"><span>🐟 Hauki</span> <span>›</span></button>
+                <button class="species-option-btn" onclick="openSpeciesDataView('Kuha')"><span>🐟 Kuha</span> <span>›</span></button>
+                <button class="species-option-btn" onclick="openSpeciesDataView('Ahven')"><span>🐟 Ahven</span> <span>›</span></button>
+            </div>
+            <button class="bottom-back-btn" onclick="switchView('map')">‹ Takaisin</button>
+        </div>
+
+        <!-- Kalakohtainen täsmätietonäkymä (Reaaliaikaiset ohjeet) -->
+        <div id="speciesDetailView" class="view-section">
+            <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 15px;">
+                <div style="width: 50px;"></div>
+                <h2 id="speciesDetailTitle" style="color: #0f4c81; font-size: 16px; margin: 0;">Kalat - Täsmätiedot</h2>
+                <div style="width: 50px;"></div>
+            </div>
+            <div id="speciesDetailBody" style="font-size: 12px; color: #333; line-height: 1.5;"></div>
+            <button class="bottom-back-btn" onclick="switchView('speciesMain')">‹ Takaisin</button>
+        </div>
+
+        <!-- Feed-näkymä (Vain paino ja pituus) -->
         <div id="feedView" class="view-section">
-            <h2 style="color: #0f4c81; margin-bottom: 15px; font-size: 18px;">📰 Yhteisön Feed</h2>
+            <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 15px;">
+                <div style="width: 50px;"></div>
+                <h2 style="color: #0f4c81; font-size: 16px; margin: 0;">📰 Yhteisön Feed</h2>
+                <div style="width: 50px;"></div>
+            </div>
             <div id="feedList">
                 <p style="color: #6b7280; font-size: 13px;">Ladataan feediä...</p>
             </div>
+            <button class="bottom-back-btn" onclick="switchView('map')">‹ Takaisin</button>
         </div>
 
         <!-- Profiilinäkymä -->
         <div id="profileView" class="view-section">
-            <h2 style="color: #0f4c81; margin-bottom: 15px; font-size: 18px;">👤 Oma Profiili</h2>
+            <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 15px;">
+                <div style="width: 50px;"></div>
+                <h2 style="color: #0f4c81; font-size: 16px; margin: 0;">👤 Oma Profiili</h2>
+                <div style="width: 50px;"></div>
+            </div>
             <p style="font-size: 13px; color: #334155;">Käyttäjä: Pasi</p>
             <p style="font-size: 13px; color: #334155; margin-top: 6px;">Tietokantayhteys: Supabase (Aktiivinen)</p>
+            <button class="bottom-back-btn" onclick="switchView('map')">‹ Takaisin</button>
         </div>
 
-        <!-- Sääpalkki (näkyy vain kartalla) -->
+        <!-- Sääpalkki -->
         <div class="weather-bar" id="weatherBar">
             <div class="header-row gps-row">
                 <div>📍 <span id="locationName">Helsinki (GPS)</span></div>
@@ -553,11 +633,10 @@
                 <div id="forecastModalBody" style="font-size: 13px; color: #333; line-height: 1.6;">
                     <p>Ladataan ennustetta...</p>
                 </div>
-                <button class="btn-save" onclick="toggleForecastModal()" style="margin-top: 15px;">Sulje</button>
+                <button class="btn-save" onclick="toggleForecastModal()" style="margin-top: 15px; width: 100%;">Sulje</button>
             </div>
         </div>
 
-        <!-- Kuvan suurennusmoduuli -->
         <div class="image-modal" id="imageModal" onclick="closeImageModal()">
             <div style="background: white; padding: 10px; border-radius: 12px; max-width: 90%; max-height: 90%; position: relative;" onclick="event.stopPropagation()">
                 <button class="close-btn" onclick="closeImageModal()" style="position: absolute; top: -10px; right: -10px; z-index: 10;">✕</button>
@@ -565,6 +644,7 @@
             </div>
         </div>
 
+        <!-- Uusi saalis -modaali -->
         <div class="catch-modal" id="catchModal">
             <div class="catch-content">
                 <div class="catch-header">
@@ -592,33 +672,30 @@
                     <input type="number" id="length" step="0.5" placeholder="esim. 75">
                 </div>
                 <div class="form-group">
+                    <label>Lämpötila (°C)</label>
+                    <input type="number" id="modalTemperature" step="0.1" placeholder="esim. 18.5">
+                </div>
+                <div class="form-group">
+                    <label>Ilmanpaine (hPa)</label>
+                    <input type="number" id="modalPressure" step="1" placeholder="esim. 1013">
+                </div>
+                <div class="form-group">
+                    <label>Säätila (weather_code / kuvaus)</label>
+                    <input type="text" id="modalWeatherCode" placeholder="esim. Selkeää tai 0">
+                </div>
+                <div class="form-group">
                     <label>Valokuva saaliista</label>
                     <label for="catchPhoto" class="camera-upload-btn">
                         📸 Ota kuva kameralla
                     </label>
                     <input type="file" id="catchPhoto" accept="image/*" capture="environment" style="display: none;" onchange="document.getElementById('fileNameDisplay').innerText = this.files.length > 0 ? 'Kuva otettu: ' + this.files[0].name : 'Ei kuvaa otettu';">
-                    <span id="fileNameDisplay" style="font-size: 11px; color: #6b7280; margin-top: 6px; display: block; text-align: center;">Ei kuvaa otettu</span>
+                    <span id="fileNameDisplay" style="font-size: 11px; color: #6b7280; margin-top: 4px; display: block; text-align: center;">Ei kuvaa otettu</span>
                 </div>
+                
                 <div class="modal-buttons">
+                    <button class="btn-back-modal" onclick="toggleCatchModal()">‹ Takaisin</button>
                     <button class="btn-save" onclick="saveCatchToCloudAndDb()">Tallenna pilveen</button>
                     <button class="btn-cancel" onclick="toggleCatchModal()">Peruuta</button>
-                </div>
-            </div>
-        </div>
-
-        <div class="species-modal" id="speciesModal">
-            <div class="catch-content">
-                <div class="catch-header">
-                    <h3 id="modalSpeciesTitle">Kalat - Täsmätiedot</h3>
-                    <button class="close-btn" onclick="toggleSpeciesModal()">✕</button>
-                </div>
-                <div id="speciesModalBody">
-                    <p style="font-size: 12px; color: #6b7280; margin-bottom: 12px;">Valitse kala nähdäksesi nykyhetken kalastustavan, vieheet ja vuodenaikaohjeet:</p>
-                    <div class="species-list">
-                        <button class="species-option-btn" onclick="selectSpeciesData('Hauki')"><span>🐟 Hauki</span> <span>›</span></button>
-                        <button class="species-option-btn" onclick="selectSpeciesData('Kuha')"><span>🐟 Kuha</span> <span>›</span></button>
-                        <button class="species-option-btn" onclick="selectSpeciesData('Ahven')"><span>🐟 Ahven</span> <span>›</span></button>
-                    </div>
                 </div>
             </div>
         </div>
@@ -630,31 +707,28 @@
             </button>
         </div>
 
+        <!-- Alapalkki -->
         <div class="nav-bar">
-            <div class="nav-row-1">
-                <button class="nav-item active" id="navMap" onclick="switchView('map')">
-                    <svg viewBox="0 0 24 24"><path d="M20.5 3l-.16.03L15 5.1 9 3 3.36 4.9c-.21.07-.36.25-.36.48V20.5c0 .28.22.5.5.5l.16-.03L9 18.9l6 2.1 5.64-1.9c.21-.07.36-.25.36-.48V3.5c0-.28-.22-.5-.5-.5zM15 19l-6-2.1V5l6 2.1V19z"/></svg>
-                    Kartta
-                </button>
-                <button class="nav-item" id="navLogbook" onclick="switchView('logbook')">
-                    <svg viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-5 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z"/></svg>
-                    Lokikirja
-                </button>
-                <button class="nav-item" id="navFeed" onclick="switchView('feed')">
-                    <svg viewBox="0 0 24 24"><path d="M18 2H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zM6 4h5v8l-2.5-1.5L6 12V4z"/></svg>
-                    Feed
-                </button>
-                <button class="nav-item" id="navProfile" onclick="switchView('profile')">
-                    <svg viewBox="0 0 24 24"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>
-                    Profiili
-                </button>
-            </div>
-            <div class="nav-row-2">
-                <button class="nav-item-species" onclick="toggleSpeciesModal()">
-                    <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/></svg>
-                    <span>Kalat</span>
-                </button>
-            </div>
+            <button class="nav-item active" id="navMap" onclick="switchView('map')">
+                <svg viewBox="0 0 24 24"><path d="M20.5 3l-.16.03L15 5.1 9 3 3.36 4.9c-.21.07-.36.25-.36.48V20.5c0 .28.22.5.5.5l.16-.03L9 18.9l6 2.1 5.64-1.9c.21-.07.36-.25.36-.48V3.5c0-.28-.22-.5-.5-.5zM15 19l-6-2.1V5l6 2.1V19z"/></svg>
+                Kartta
+            </button>
+            <button class="nav-item" id="navLogbook" onclick="switchView('logbook')">
+                <svg viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-5 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z"/></svg>
+                Lokikirja
+            </button>
+            <button class="nav-item" id="navFeed" onclick="switchView('feed')">
+                <svg viewBox="0 0 24 24"><path d="M18 2H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zM6 4h5v8l-2.5-1.5L6 12V4z"/></svg>
+                Feed
+            </button>
+            <button class="nav-item" id="navSpecies" onclick="switchView('speciesMain')">
+                <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/></svg>
+                Kalat
+            </button>
+            <button class="nav-item" id="navProfile" onclick="switchView('profile')">
+                <svg viewBox="0 0 24 24"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>
+                Profiili
+            </button>
         </div>
     </div>
 
@@ -665,6 +739,13 @@
         L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { maxZoom: 19 }).addTo(map);
 
         let globalForecastData = null;
+        let currentLat = 60.1699;
+        let currentLon = 24.9384;
+        let currentTemperature = null;
+        let currentSurfacePressure = 1013;
+        let currentWindSpeed = 0;
+        let currentWeatherDataCode = null;
+
         const SUPABASE_URL = "https://ddceioqfjyxvbdvkaedi.supabase.co";
         const SUPABASE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImRkY2Vpb3Fmanl4dmJkdmthZWRpIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODYzNTUzOTAsImV4cCI6MjEwMTkzMTM5MH0.hyI1mf9zkIQK2BghBR6JjDtdf0pUBB2jsdvHcH8yfIw";
 
@@ -682,20 +763,116 @@
             } else if (viewName === 'logbook') {
                 document.getElementById('logbookView').classList.add('active-view');
                 document.getElementById('navLogbook').classList.add('active');
-                fetchCatchesForView('logbookList');
+            } else if (viewName === 'logbookSpecies') {
+                document.getElementById('logbookSpeciesView').classList.add('active-view');
+                document.getElementById('navLogbook').classList.add('active');
+            } else if (viewName === 'speciesMain') {
+                document.getElementById('speciesMainView').classList.add('active-view');
+                document.getElementById('navSpecies').classList.add('active');
+            } else if (viewName === 'speciesDetail') {
+                document.getElementById('speciesDetailView').classList.add('active-view');
+                document.getElementById('navSpecies').classList.add('active');
             } else if (viewName === 'feed') {
                 document.getElementById('feedView').classList.add('active-view');
                 document.getElementById('navFeed').classList.add('active');
-                fetchCatchesForView('feedList');
+                fetchFeedCatches();
             } else if (viewName === 'profile') {
                 document.getElementById('profileView').classList.add('active-view');
                 document.getElementById('navProfile').classList.add('active');
             }
         }
 
-        async function fetchCatchesForView(containerId) {
-            const container = document.getElementById(containerId);
-            container.innerHTML = '<p style="color: #6b7280; font-size: 13px;">Ladataan saaliita tietokannasta...</p>';
+        async function loadExistingCatchesOnMap() {
+            try {
+                const response = await fetch(`${SUPABASE_URL}/rest/v1/catches?select=*`, {
+                    headers: {
+                        "apikey": SUPABASE_KEY,
+                        "Authorization": `Bearer ${SUPABASE_KEY}`
+                    }
+                });
+                if (!response.ok) return;
+                const catches = await response.json();
+                catches.forEach(item => {
+                    if (item.lat && item.lon) {
+                        addCatchPinToMap(item);
+                    }
+                });
+            } catch (err) {
+                console.error("Virhe ladattaessa saalispinssejä kartalle:", err);
+            }
+        }
+
+        function addCatchPinToMap(item) {
+            const popupContent = `
+                <div style="font-family: sans-serif; font-size: 12px; text-align: center;">
+                    <strong style="color: #0f4c81; font-size: 14px;">🐟 ${item.species}</strong><br>
+                    ⚖️ Paino: <strong>${item.weight} kg</strong> ${item.length ? `| 📏 ${item.length} cm` : ''}<br>
+                    👤 Kalastaja: ${item.fisherman || 'Anonyymi'}<br>
+                    ${item.image_url ? `<img src="${item.image_url}" style="width: 100px; height: 75px; object-fit: cover; border-radius: 6px; margin-top: 6px; cursor: pointer;" onclick="openImageModal('${item.image_url}')">` : ''}
+                </div>
+            `;
+            L.marker([item.lat, item.lon]).addTo(map).bindPopup(popupContent);
+        }
+
+        async function openLogbookSpecies(speciesName) {
+            document.getElementById('logbookSpeciesTitle').innerText = `📖 ${speciesName} - Lokikirja`;
+            switchView('logbookSpecies');
+            
+            const container = document.getElementById('logbookSpeciesList');
+            container.innerHTML = `<p style="color: #6b7280; font-size: 13px;">Ladataan ${speciesName.toLowerCase()}saaliita...</p>`;
+
+            try {
+                const response = await fetch(`${SUPABASE_URL}/rest/v1/catches?species=eq.${encodeURIComponent(speciesName)}&select=*&order=created_at.desc`, {
+                    headers: {
+                        "apikey": SUPABASE_KEY,
+                        "Authorization": `Bearer ${SUPABASE_KEY}`
+                    }
+                });
+
+                if (!response.ok) throw new Error("Haku epäonnistui");
+                const catches = await response.json();
+
+                if (catches.length === 0) {
+                    container.innerHTML = `<p style="color: #6b7280; font-size: 13px;">Ei tallennettuja saaliita lajille ${speciesName}.</p>`;
+                    return;
+                }
+
+                let html = '';
+                catches.forEach(item => {
+                    const dateStr = new Date(item.created_at).toLocaleDateString('fi-FI', { day: 'numeric', month: 'numeric', year: 'numeric', hour: '2-digit', minute: '2-digit' });
+                    const fishermanText = item.fisherman ? `👤 ${item.fisherman}` : '👤 Anonyymi';
+                    const imgHtml = item.image_url 
+                        ? `<img src="${item.image_url}" alt="Saalis" onclick="openImageModal('${item.image_url}')">` 
+                        : `<div style="width:70px;height:70px;background:#e2e8f0;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:20px;">🐟</div>`;
+
+                    html += `
+                        <div class="catch-card">
+                            ${imgHtml}
+                            <div class="catch-card-info">
+                                <div class="catch-card-title">
+                                    <span>${item.species}</span>
+                                    <span style="font-size: 11px; color: #0284c7; background: #e0f2fe; padding: 2px 6px; border-radius: 6px;">${fishermanText}</span>
+                                </div>
+                                <div>⚖️ Paino: <strong>${item.weight} kg</strong> ${item.length ? `| 📏 Pituus: <strong>${item.length} cm</strong>` : ''}</div>
+                                <div>🌤️ Säätila: ${item.weather_conditions || 'Ei tietoa'}</div>
+                                <div>🌡️ Lämpötila: ${item.temperature !== undefined && item.temperature !== null ? item.temperature + ' °C' : 'Ei tietoa'}</div>
+                                <div>🔽 Ilmanpaine: ${item.pressure ? item.pressure + ' hPa' : 'Ei tietoa'}</div>
+                                <div style="font-size: 10px; color: #94a3b8; margin-top: 2px;">🕒 ${dateStr}</div>
+                            </div>
+                        </div>
+                    `;
+                });
+                container.innerHTML = html;
+
+            } catch (err) {
+                console.error("Virhe haettaessa saaliita lokikirjaan:", err);
+                container.innerHTML = '<p style="color: #ef4444; font-size: 13px;">Lokikirjan tietojen lataus epäonnistui.</p>';
+            }
+        }
+
+        async function fetchFeedCatches() {
+            const container = document.getElementById('feedList');
+            container.innerHTML = '<p style="color: #6b7280; font-size: 13px;">Ladataan feediä tietokannasta...</p>';
 
             try {
                 const response = await fetch(`${SUPABASE_URL}/rest/v1/catches?select=*&order=created_at.desc`, {
@@ -706,7 +883,6 @@
                 });
 
                 if (!response.ok) throw new Error("Haku epäonnistui");
-
                 const catches = await response.json();
 
                 if (catches.length === 0) {
@@ -731,8 +907,7 @@
                                     <span style="font-size: 11px; color: #0284c7; background: #e0f2fe; padding: 2px 6px; border-radius: 6px;">${fishermanText}</span>
                                 </div>
                                 <div>⚖️ Paino: <strong>${item.weight} kg</strong> ${item.length ? `| 📏 Pituus: <strong>${item.length} cm</strong>` : ''}</div>
-                                <div>🔽 Ilmanpaine: ${item.pressure ? item.pressure + ' hPa' : 'Ei tietoa'}</div>
-                                <div style="font-size: 10px; color: #94a3b8; margin-top: 2px;">🕒 ${dateStr}</div>
+                                <div style="font-size: 10px; color: #94a3b8; margin-top: 4px;">🕒 ${dateStr}</div>
                             </div>
                         </div>
                     `;
@@ -740,9 +915,96 @@
                 container.innerHTML = html;
 
             } catch (err) {
-                console.error("Virhe haettaessa saaliita:", err);
-                container.innerHTML = '<p style="color: #ef4444; font-size: 13px;">Saaliiden lataus epäonnistui.</p>';
+                console.error("Virhe haettaessa feediä:", err);
+                container.innerHTML = '<p style="color: #ef4444; font-size: 13px;">Feedin lataus epäonnistui.</p>';
             }
+        }
+
+        function openSpeciesDataView(speciesName) {
+            document.getElementById('speciesDetailTitle').innerText = `🐟 ${speciesName} - Reaaliaikaiset Täsmätiedot`;
+            switchView('speciesDetail');
+            
+            const body = document.getElementById('speciesDetailBody');
+            
+            const pRounded = Math.round(currentSurfacePressure);
+            let pressureState = "vakaa";
+            if (pRounded < 1010) pressureState = "matalapaine";
+            else if (pRounded > 1020) pressureState = "korkeapaine";
+
+            const isCloudyOrRaining = currentWeatherDataCode >= 1;
+            const windText = currentWindSpeed > 4 ? "tuulinen" : "tyyni";
+
+            let realTimeAdvice = "";
+            let recommendedLures = "";
+            let recommendedColors = "";
+            let depthAdvice = "";
+
+            if (speciesName === 'Hauki') {
+                if (pressureState === "matalapaine" || isCloudyOrRaining) {
+                    realTimeAdvice = "Matalapaine / pilvinen sää: Hauki on aktiivisella tuulella ja saalistaa aktiivisesti matalikoilla ja kaislikoiden reunoilla. Nyt kannattaa hyödyntää aktiivista uittoa.";
+                    recommendedLures = "Isot kumikalat (15-25 cm) raskaammilla jigipäillä, liukuvat jerkkivieheet (glider) tai leveäpotkuiset lusikkauistimet.";
+                    recommendedColors = "Luonnonvärit (ahven, särki) kirkkaaseen vettiin; sameaan tai sateiseen säähän räikeät Firetiger, flash ja fluorikeltainen.";
+                    depthAdvice = "Syvyysalue: 1.0 – 3.5 metriä (kaislikon reunat, tuulenpuoleiset penkat).";
+                } else if (pressureState === "korkeapaine") {
+                    realTimeAdvice = "Korkeapaine / aurinkoinen sää: Hauki on passiivisempi ja saattaa maata syvemmällä pohjan läheisyydessä. Vaatii hitaampaa uittoa ja pitkiä pysähdyksiä.";
+                    recommendedLures = "Hitaasti uivat swimbaitit, suspetti-vaaput pitkillä tauoilla tai hitaasti kelatut spinnerbaitit.";
+                    recommendedColors = "Himmeät ja luonnonmukaiset sävyt: hopea, helmiäinen ja hauen oma luonnonväri.";
+                    depthAdvice = "Syvyysalue: 3.0 – 6.0 metriä (syvemmät penkat ja karikoiden reunat).";
+                } else {
+                    realTimeAdvice = "Normaali paine: Perustilanne. Hauki liikkuu aktiivisesti tuulenpuoleisilla rannoilla ja virtapaikoissa.";
+                    recommendedLures = "Perinteiset jerkkivieheet, pyrstökumit ja lusikat.";
+                    recommendedColors = "Muikku, ahven ja perus kontrastivärit.";
+                    depthAdvice = "Syvyysalue: 2.0 – 4.0 metriä.";
+                }
+            } else if (speciesName === 'Kuha') {
+                if (isCloudyOrRaining || windText === "tuulinen") {
+                    realTimeAdvice = "Pilvinen/tuulinen sää: Kuhan syönti-ikkuna on laajentunut, eikä se arastele pinnan läheisyyttä. Nousee aktiivisesti ruokailmalle penkoille.";
+                    recommendedLures = "Heittojigit (kourupyrstöt, toukat) ja kevyet pystyjigit.";
+                    recommendedColors = "Chartreuse, helmiäisvalkoinen, oranssi ja UV-aktiiviset sävyt.";
+                    depthAdvice = "Syvyysalue: 3.0 – 7.0 metriä (penkat ja karikoiden reuna-alueet).";
+                } else {
+                    realTimeAdvice = "Aurinkoinen/tyyni sää: Kuha painuu syvemmälle ja odottaa hämärämpää. Vaatii tarkkaa pohjan tuntumaa ja jigin uittoa suoraan parven kylkeen.";
+                    recommendedLures = "Drop-shot rigit, raskaammat jigit pohjasta uitettuna tai syvännevaaput.";
+                    recommendedColors = "Moottoriöljy (motoroil), tumma violetti ja luonnonmukainen kuha-/särkiväri.";
+                    depthAdvice = "Syvyysalue: 6.0 – 12.0 metriä (syvänteet, montut ja selkäkarikot).";
+                }
+            } else if (speciesName === 'Ahven') {
+                if (pressureState === "matalapaine") {
+                    realTimeAdvice = "Matalapaine: Ahvenparvet ovat aktiivisia välivedessä ja kivikoiden reunnoilla. Nopea reagointi tuo hyvän saaliin.";
+                    recommendedLures = "Pienet jigit (5–9 cm), lippa-uistimet tai tasapainopilkit.";
+                    recommendedColors = "Kirkkaat värilliset pyrstöt, punainen, muikku ja keltainen.";
+                    depthAdvice = "Syvyysalue: 1.5 – 4.0 metriä.";
+                } else {
+                    realTimeAdvice = "Vakaa / korkea paine: Ahven puree herkemmin pohjan läheisyydestä karikoilta ja salmista. Vaatii hienovaraista esitystä.";
+                    recommendedLures = "Carolina-rig, drop-shot tai pienet kevyet jigit.";
+                    recommendedColors = "Moottoriöljy, luonnonmukainen pikkukala ja ruskean sävyt.";
+                    depthAdvice = "Syvyysalue: 3.0 – 7.0 metriä.";
+                }
+            }
+
+            let content = `
+                <div class="realtime-badge">
+                    ⚡ Vallitseva sää: ${pRounded} hPa (${pressureState}), ${currentTemperature !== null ? currentTemperature + ' °C' : ''}, tuuli ${currentWindSpeed} m/s
+                </div>
+                <div class="detail-card">
+                    <h4>🎯 Reaaliaikainen taktiikka</h4>
+                    <p>${realTimeAdvice}</p>
+                </div>
+                <div class="detail-card">
+                    <h4>🎣 Suositellut vieheet</h4>
+                    <p>${recommendedLures}</p>
+                </div>
+                <div class="detail-card">
+                    <h4>🎨 Suositellut värit</h4>
+                    <p>${recommendedColors}</p>
+                </div>
+                <div class="detail-card">
+                    <h4>📍 Optimaalinen syvyys</h4>
+                    <p>${depthAdvice}</p>
+                </div>
+            `;
+
+            body.innerHTML = content;
         }
 
         function openImageModal(url) {
@@ -757,17 +1019,21 @@
         function updateWeatherData(locationName = "Helsinki (GPS)") {
             if (navigator.geolocation && locationName.includes("GPS")) {
                 navigator.geolocation.getCurrentPosition((position) => {
-                    const lat = position.coords.latitude;
-                    const lon = position.coords.longitude;
-                    map.setView([lat, lon], 13);
-                    document.getElementById('locationName').innerText = `GPS (${lat.toFixed(2)}, ${lon.toFixed(2)})`;
-                    fetchWeatherDataApi(lat, lon);
+                    currentLat = position.coords.latitude;
+                    currentLon = position.coords.longitude;
+                    map.setView([currentLat, currentLon], 13);
+                    document.getElementById('locationName').innerText = `GPS (${currentLat.toFixed(2)}, ${currentLon.toFixed(2)})`;
+                    fetchWeatherDataApi(currentLat, currentLon);
                 }, () => {
-                    fetchWeatherDataApi(60.1699, 24.9384);
+                    currentLat = 60.1699;
+                    currentLon = 24.9384;
+                    fetchWeatherDataApi(currentLat, currentLon);
                 });
             } else {
                 document.getElementById('locationName').innerText = locationName;
-                fetchWeatherDataApi(60.1699, 24.9384);
+                currentLat = map.getCenter().lat;
+                currentLon = map.getCenter().lng;
+                fetchWeatherDataApi(currentLat, currentLon);
             }
         }
 
@@ -778,17 +1044,18 @@
                 globalForecastData = data;
                 
                 if (data && data.current) {
-                    const temp = data.current.temperature_2m;
-                    const pressure = data.current.surface_pressure;
-                    const wind = data.current.wind_speed_10m;
+                    currentTemperature = data.current.temperature_2m;
+                    currentWeatherDataCode = data.current.weathercode;
+                    currentSurfacePressure = data.current.surface_pressure;
+                    currentWindSpeed = data.current.wind_speed_10m;
 
                     let pressureText = "Normaali ilmanpaine";
-                    const pRounded = Math.round(pressure);
+                    const pRounded = Math.round(currentSurfacePressure);
                     if (pRounded < 1010) pressureText = "Matalapaine";
                     else if (pRounded > 1020) pressureText = "Korkeapaine";
 
-                    document.getElementById('curTemp').innerText = `🌡️ ${temp} °C`;
-                    document.getElementById('curWind').innerText = `💨 Tuuli: ${wind} m/s`;
+                    document.getElementById('curTemp').innerText = `🌡️ ${currentTemperature} °C`;
+                    document.getElementById('curWind').innerText = `💨 Tuuli: ${currentWindSpeed} m/s`;
                     document.getElementById('curPressureText').innerText = `🔽 Ilmanpaine: ${pRounded} hPa (${pressureText})`;
                 }
             } catch (err) {
@@ -798,6 +1065,7 @@
         }
 
         updateWeatherData();
+        loadExistingCatchesOnMap();
 
         async function setManualLocation() {
             const val = document.getElementById('manualLocation').value.trim();
@@ -807,9 +1075,11 @@
                     const geoData = await geoRes.json();
                     if (geoData && geoData.results && geoData.results.length > 0) {
                         const loc = geoData.results[0];
-                        map.setView([loc.latitude, loc.longitude], 13);
+                        currentLat = loc.latitude;
+                        currentLon = loc.longitude;
+                        map.setView([currentLat, currentLon], 13);
                         document.getElementById('locationName').innerText = `${loc.name} (${loc.country || ''})`;
-                        fetchWeatherDataApi(loc.latitude, loc.longitude);
+                        fetchWeatherDataApi(currentLat, currentLon);
                     } else {
                         alert("Paikkakuntaa ei löytynyt.");
                     }
@@ -887,34 +1157,11 @@
                 document.getElementById('length').value = "";
                 document.getElementById('catchPhoto').value = "";
                 document.getElementById('fileNameDisplay').innerText = "Ei kuvaa otettu";
+
+                document.getElementById('modalTemperature').value = currentTemperature !== null ? currentTemperature : "";
+                document.getElementById('modalPressure').value = currentSurfacePressure ? Math.round(currentSurfacePressure) : "";
+                document.getElementById('modalWeatherCode').value = currentWeatherDataCode !== null ? currentWeatherDataCode : "";
             }
-        }
-
-        function toggleSpeciesModal() {
-            const modal = document.getElementById('speciesModal');
-            if (modal.style.display === 'flex') modal.style.display = 'none';
-            else modal.style.display = 'flex';
-        }
-
-        function selectSpeciesData(speciesName) {
-            const body = document.getElementById('speciesModalBody');
-            document.getElementById('modalSpeciesTitle').innerText = `${speciesName} - Kalat Täsmätiedot`;
-            
-            let content = "";
-            if (speciesName === 'Hauki') {
-                content = `<strong>🎣 Hauki:</strong> Kaislikoiden reunat ja penkat. Jerkit, lusikat ja kumikalat.`;
-            } else if (speciesName === 'Kuha') {
-                content = `<strong>🎣 Kuha:</strong> Tuulenalaiset penkat ja syvemmät selkäkarikot. Jigit ja vaaput.`;
-            } else if (speciesName === 'Ahven') {
-                content = `<strong>🎣 Ahven:</strong> Matalikot ja kivikoiden reunat. Pienet jigit ja lipat.`;
-            }
-
-            body.innerHTML = `
-                <div style="font-size: 13px; color: #333; line-height: 1.6;">
-                    <div style="background: #e0f2fe; padding: 10px; border-radius: 8px; margin-bottom: 10px;">${content}</div>
-                    <button class="btn-save" onclick="toggleSpeciesModal()" style="margin-top: 10px;">Sulje</button>
-                </div>
-            `;
         }
 
         async function saveCatchToCloudAndDb() {
@@ -923,6 +1170,10 @@
             const weight = document.getElementById('weight').value;
             const length = document.getElementById('length').value;
             const fileInput = document.getElementById('catchPhoto');
+
+            const tempInput = document.getElementById('modalTemperature').value;
+            const pressureInput = document.getElementById('modalPressure').value;
+            const weatherCodeInput = document.getElementById('modalWeatherCode').value;
 
             if (!weight) {
                 alert("Anna saaliin paino!");
@@ -944,8 +1195,11 @@
                         body: formData
                     });
                     const data = await res.json();
-                    if (data.secure_url) imageUrl = data.secure_url;
-                    else throw new Error("Kuvan lataus epäonnistui");
+                    if (data.secure_url) {
+                        imageUrl = data.secure_url;
+                    } else {
+                        throw new Error("Kuvan lataus epäonnistui");
+                    }
                 } catch (err) {
                     console.error("Cloudinary virhe:", err);
                     alert("Kuvan lataus pilveen epäonnistui.");
@@ -959,7 +1213,11 @@
                 weight: parseFloat(weight),
                 length: length ? parseFloat(length) : null,
                 image_url: imageUrl,
-                pressure: globalForecastData && globalForecastData.current ? Math.round(globalForecastData.current.surface_pressure) : 1013,
+                pressure: pressureInput ? parseFloat(pressureInput) : null,
+                temperature: tempInput ? parseFloat(tempInput) : null,
+                weather_conditions: weatherCodeInput || null,
+                lat: typeof currentLat !== 'undefined' ? currentLat : null,
+                lon: typeof currentLon !== 'undefined' ? currentLon : null,
                 created_at: new Date().toISOString()
             };
 
@@ -980,8 +1238,12 @@
                     throw new Error("Tallennus epäonnistui: " + errorText);
                 }
 
-                alert("Saalis tallennettu onnistuneesti pilveen!");
+                addCatchPinToMap(catchData);
+
+                alert("Saalis tallennettu onnistuneesti!");
                 toggleCatchModal();
+                switchView('map');
+                fetchFeedCatches();
 
             } catch (err) {
                 console.error("Tietokantavirhe:", err);
