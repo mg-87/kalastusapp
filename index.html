@@ -569,27 +569,28 @@
 
         document.getElementById("coordStatus").innerText = "☁️ Tallennetaan saalista...";
 
-        // Lähetetään taustalla Driveen (no-cors)
-        try {
-            const payload = {
-                password: passwordInput,
-                base64Data: tempImageBase64 || "",
-                contentType: "image/jpeg",
-                fileName: `Kala_${species}_${Date.now()}.jpg`,
-                species: species,
-                weight: weight,
-                length: length,
-                depth: depth,
-                lure: lure
-            };
+        // Lähetetään taustalla Driveen (estetään jumittuminen)
+        const payload = {
+            password: passwordInput,
+            base64Data: tempImageBase64 || "",
+            contentType: "image/jpeg",
+            fileName: `Kala_${species}_${Date.now()}.jpg`,
+            species: species,
+            weight: weight,
+            length: length,
+            depth: depth,
+            lure: lure
+        };
+
+        if (navigator.sendBeacon) {
+            navigator.sendBeacon(APP_CONFIG.DRIVE_WEB_APP_URL, JSON.stringify(payload));
+        } else {
             fetch(APP_CONFIG.DRIVE_WEB_APP_URL, {
                 method: "POST",
                 mode: "no-cors",
                 headers: { "Content-Type": "text/plain;charset=utf-8" },
                 body: JSON.stringify(payload)
-            }).catch(err => console.error("Drive lähetysvirhe:", err));
-        } catch (err) {
-            console.error("Virhe Driven siirrossa:", err);
+            }).catch(() => {});
         }
 
         const newCatch = {
@@ -614,6 +615,7 @@
         catches.push(newCatch);
         localStorage.setItem("kalapaine_catches", JSON.stringify(catches));
 
+        // Tyhjennetään kentät heti
         document.getElementById("catchWeight").value = "";
         document.getElementById("catchLength").value = "";
         document.getElementById("catchDepth").value = "";
@@ -621,6 +623,7 @@
         document.getElementById("catchPassword").value = "";
         document.getElementById("preview-img").style.display = "none";
         tempImageBase64 = "";
+        
         document.getElementById("coordStatus").innerText = "✓ Saalis tallennettu onnistuneesti!";
 
         loadCatchesFromStorage();
