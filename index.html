@@ -60,7 +60,7 @@
             display: flex;
             gap: 8px;
         }
-        input[type="text"], input[type="number"], select {
+        input[type="text"], input[type="number"], input[type="password"], select {
             flex: 1;
             background-color: #0f172a;
             border: 1px solid var(--border-color);
@@ -83,23 +83,34 @@
         .weather-main {
             display: flex;
             justify-content: space-between;
-            align-items: center;
+            align-items: flex-start;
+        }
+        .pressure-container {
+            display: flex;
+            align-items: baseline;
+            gap: 6px;
         }
         .pressure-val {
             font-size: 2.2rem;
             font-weight: bold;
             color: var(--accent-green);
+            line-height: 1.1;
+        }
+        .pressure-unit {
+            font-size: 1rem;
+            color: var(--text-muted);
+            font-weight: normal;
         }
         .location {
             font-size: 1.1rem;
             font-weight: 600;
-            margin-bottom: 8px;
+            margin-bottom: 10px;
         }
         .weather-details {
             text-align: right;
             font-size: 0.9rem;
             color: var(--text-muted);
-            white-space: nowrap;
+            line-height: 1.4;
         }
         button {
             background-color: var(--accent);
@@ -255,6 +266,8 @@
     </style>
     <!-- Leaflet JS -->
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+    <!-- Ladataan paikalliset asetukset (ei mene GitHubiin) -->
+    <script src="config.js"></script>
 </head>
 <body>
 
@@ -262,7 +275,7 @@
     <!-- PÄÄNÄKYMÄ -->
     <div id="main-view">
         <h1>Pasin kala äppi 🎣</h1>
-        <div class="subtitle">Sää, Ilmanpaine & Kausikartta</div>
+        <div class="subtitle">Sää, Vuodenajat & Saalisarkisto</div>
 
         <div class="card">
             <div class="search-box">
@@ -334,6 +347,12 @@
                     <label>Käytetty uistin:</label>
                     <input type="text" id="catchLure" placeholder="esim. Vihreä jigi">
                 </div>
+            </div>
+
+            <!-- Salasana-kenttä ennen tallennusta -->
+            <div class="form-group">
+                <label>Sovelluksen salasana (vaaditaan tallennukseen):</label>
+                <input type="password" id="catchPassword" placeholder="Syötä salasana">
             </div>
 
             <div style="font-size: 0.8rem; color: var(--accent-green); margin-bottom: 10px;" id="coordStatus">
@@ -418,9 +437,6 @@
 </div>
 
 <script>
-    // Google Drive Web App -osoite
-    const DRIVE_WEB_APP_URL = "https://script.google.com/macros/s/AKfycby2mfKjTkJah_QPuR9ypIfopxYABYdDR1LmcgLhfUr0-_y2ihsgA11L-jZB0BrFIJZ3yg/exec";
-
     let globalData = null;
     let globalLocationName = "";
     let currentPressureVal = 1013;
@@ -522,6 +538,12 @@
     }
 
     async function saveCatchToMap() {
+        const passwordInput = document.getElementById("catchPassword").value;
+        if (typeof APP_CONFIG === 'undefined' || passwordInput !== APP_CONFIG.PASSWORD) {
+            alert("Virheellinen salasana! Et voi tallentaa saalista ilman oikeaa salasanaa.");
+            return;
+        }
+
         const species = document.getElementById("catchSpecies").value;
         const weight = document.getElementById("catchWeight").value.trim() || "Ei ilmoitettu";
         const length = document.getElementById("catchLength").value.trim() || "Ei ilmoitettu";
@@ -532,7 +554,6 @@
         const dateStr = now.toLocaleDateString('fi-FI');
         const timeStr = now.toLocaleTimeString('fi-FI', { hour: '2-digit', minute: '2-digit' });
 
-        // Jos kuva on otettu, lähetetään se Google Driveen
         if (tempImageBase64) {
             document.getElementById("coordStatus").innerText = "☁️ Lähetetään kuvaa Google Driveen...";
             try {
@@ -541,7 +562,7 @@
                     contentType: "image/jpeg",
                     fileName: `Kala_${species}_${Date.now()}.jpg`
                 };
-                await fetch(DRIVE_WEB_APP_URL, {
+                await fetch(APP_CONFIG.DRIVE_WEB_APP_URL, {
                     method: "POST",
                     mode: "no-cors",
                     headers: { "Content-Type": "text/plain;charset=utf-8" },
@@ -578,6 +599,7 @@
         document.getElementById("catchLength").value = "";
         document.getElementById("catchDepth").value = "";
         document.getElementById("catchLure").value = "";
+        document.getElementById("catchPassword").value = "";
         document.getElementById("preview-img").style.display = "none";
         tempImageBase64 = "";
         document.getElementById("coordStatus").innerText = "✓ Saalis tallennettu & kuva viety Driveen!";
@@ -624,7 +646,7 @@
         loadCatchesFromStorage();
 
         window.scrollTo({ top: document.getElementById("catchSpecies").offsetTop - 50, behavior: 'smooth' });
-        document.getElementById("coordStatus").innerText = "✏️ Muokataan saalista. Säädä tiedot ja paina Tallenna.";
+        document.getElementById("coordStatus").innerText = "✏️ Muokataan saalista. Säädä tiedot ja salasana ennen tallennusta.";
     }
 
     function loadCatchesFromStorage() {
@@ -847,7 +869,10 @@
                 <div class="location">📍 ${locationName}</div>
                 <div class="weather-main">
                     <div>
-                        <div class="pressure-val">${currentPressureVal} <span style="font-size: 1rem; color: var(--text-muted);">hPa</span></div>
+                        <div class="pressure-container">
+                            <span class="pressure-val">${currentPressureVal}</span>
+                            <span class="pressure-unit">hPa</span>
+                        </div>
                         <div style="color: ${trendColor}; font-weight: bold; font-size: 0.85rem; margin-top: 4px;">${trendText}</div>
                     </div>
                     <div class="weather-details">
@@ -925,7 +950,7 @@
                 seasonText = "Kevät & Kutuaika (Huhti-toukokuu): Hauki kutee heti jäiden lähdön jälkeen matalissa kaislikoissa ja tulvarannoilla. Kutua seuraa raju nälkäkausi.";
                 locText = "Matalat kaisikot, lahtien pohjukat ja kutualueiden reunat (0.5 – 1.5 m).";
                 actionText = "Jerkit, isot vaaput ja kevennetyt lusikat näyttävillä pysäytyksillä.";
-                colorText = "Ärkejvärit: papukaija, oranssi, hauen oma kuosi ja kirkas keltainen.";
+                colorText = "Ärkejvärit: papukaija, oranssi, hauen oma kuosi ja kirkkaat keltainen.";
             } else if (month >= 6 && month <= 8) {
                 seasonText = "Kesäkausi (Kesä-elokuu): Veden lämmetessä isompi hauki siirtyy syvemmille vesille, tuulisille selkäpakkoille ja kaislikoiden ulkoreunoille.";
                 locText = currentTrendStatus === 'matala' ? "Kaislikon reunat ja tuulen puoleiset matalikot (2 – 3 m)." : "Syvemmät kaislikonreunat, kivikot ja selkäpakat (4 – 7 m).";
