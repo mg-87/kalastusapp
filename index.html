@@ -114,24 +114,38 @@
             cursor: pointer;
         }
 
-        .bottom-back-btn {
-            position: absolute;
-            bottom: 75px;
-            left: 15px;
-            z-index: 20;
+        .top-back-btn {
             background: #e0f2fe;
             color: #0369a1;
             border: none;
-            padding: 8px 14px;
-            border-radius: 12px;
-            font-size: 12px;
+            padding: 6px 12px;
+            border-radius: 10px;
+            font-size: 11px;
             font-weight: bold;
             cursor: pointer;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+            flex-shrink: 0;
         }
 
-        .bottom-back-btn:active {
+        .top-back-btn:active {
             transform: scale(0.95);
+        }
+
+        .view-header-container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 15px;
+            position: relative;
+            width: 100%;
+        }
+
+        .view-header-container h2 {
+            color: #0f4c81;
+            font-size: 15px;
+            margin: 0;
+            text-align: center;
+            flex-grow: 1;
         }
 
         .manual-input-container {
@@ -212,7 +226,7 @@
             max-height: 88vh;
             border-top-left-radius: 24px;
             border-top-right-radius: 24px;
-            padding: 35px 20px 90px 20px; /* Siirretty ylätilaa alemmas, jotta otsikko ei mene reunaan */
+            padding: 35px 20px 90px 20px;
             overflow-y: auto;
             box-shadow: 0 -10px 25px rgba(0,0,0,0.2);
             animation: slideUp 0.3s ease-out;
@@ -512,10 +526,10 @@
 
         <!-- Lokikirjan pääsivu -->
         <div id="logbookView" class="view-section">
-            <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 15px;">
-                <div style="width: 50px;"></div>
-                <h2 style="color: #0f4c81; font-size: 16px; margin: 0;">📖 Lokikirja</h2>
-                <div style="width: 50px;"></div>
+            <div class="view-header-container">
+                <button class="top-back-btn" onclick="switchView('map')">‹ Takaisin</button>
+                <h2>📖 Lokikirja</h2>
+                <div style="width: 70px;"></div>
             </div>
             <p style="font-size: 12px; color: #6b7280; margin-bottom: 15px;">Valitse kala nähdäksesi kyseisen lajin saaliit, tiedot ja kuvat:</p>
             <div class="species-list">
@@ -523,72 +537,66 @@
                 <button class="species-option-btn" onclick="openLogbookSpecies('Kuha')"><span>🐟 Kuha</span> <span>›</span></button>
                 <button class="species-option-btn" onclick="openLogbookSpecies('Ahven')"><span>🐟 Ahven</span> <span>›</span></button>
             </div>
-            <button class="bottom-back-btn" onclick="switchView('map')">‹ Takaisin</button>
         </div>
 
         <!-- Kalakohtainen sivunäkymä lokikirjalle -->
         <div id="logbookSpeciesView" class="view-section">
-            <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 15px;">
-                <div style="width: 50px;"></div>
-                <h2 id="logbookSpeciesTitle" style="color: #0f4c81; font-size: 16px; margin: 0;">Kalat</h2>
-                <div style="width: 50px;"></div>
+            <div class="view-header-container">
+                <button class="top-back-btn" onclick="switchView('logbook')">‹ Takaisin</button>
+                <h2 id="logbookSpeciesTitle">Kalat</h2>
+                <div style="width: 70px;"></div>
             </div>
             <div id="logbookSpeciesList">
                 <p style="color: #6b7280; font-size: 13px;">Ladataan saaliita...</p>
             </div>
-            <button class="bottom-back-btn" onclick="switchView('logbook')">‹ Takaisin</button>
         </div>
 
         <!-- Kalat-pääsivu -->
         <div id="speciesMainView" class="view-section">
-            <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 15px;">
-                <div style="width: 50px;"></div>
-                <h2 style="color: #0f4c81; font-size: 16px; margin: 0;">🐟 Kalat - Täsmätiedot</h2>
-                <div style="width: 50px;"></div>
+            <div class="view-header-container">
+                <button class="top-back-btn" onclick="switchView('map')">‹ Takaisin</button>
+                <h2>🐟 Kalat - Täsmätiedot</h2>
+                <div style="width: 70px;"></div>
             </div>
-            <p style="font-size: 12px; color: #6b7280; margin-bottom: 15px;">Valitse kala nähdäksesi reaaliaikaiset taktiset ohjeet, suositellut vieheet ja värit vallitsevan sään mukaan:</p>
+            <p style="font-size: 12px; color: #6b7280; margin-bottom: 15px;">Valitse kala nähdäksesi reaaliaikaiset taktiset ohjeet, suositellut vieheet, värit ja kuukausikohtaisen oppaan vallitsevan sään mukaan:</p>
             <div class="species-list">
                 <button class="species-option-btn" onclick="openSpeciesDataView('Hauki')"><span>🐟 Hauki</span> <span>›</span></button>
                 <button class="species-option-btn" onclick="openSpeciesDataView('Kuha')"><span>🐟 Kuha</span> <span>›</span></button>
                 <button class="species-option-btn" onclick="openSpeciesDataView('Ahven')"><span>🐟 Ahven</span> <span>›</span></button>
             </div>
-            <button class="bottom-back-btn" onclick="switchView('map')">‹ Takaisin</button>
         </div>
 
         <!-- Kalakohtainen täsmätietonäkymä (Reaaliaikaiset ohjeet) -->
         <div id="speciesDetailView" class="view-section">
-            <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 15px;">
-                <div style="width: 50px;"></div>
-                <h2 id="speciesDetailTitle" style="color: #0f4c81; font-size: 16px; margin: 0;">Kalat - Täsmätiedot</h2>
-                <div style="width: 50px;"></div>
+            <div class="view-header-container">
+                <button class="top-back-btn" onclick="switchView('speciesMain')">‹ Takaisin</button>
+                <h2 id="speciesDetailTitle">Täsmätiedot</h2>
+                <div style="width: 70px;"></div>
             </div>
             <div id="speciesDetailBody" style="font-size: 12px; color: #333; line-height: 1.5;"></div>
-            <button class="bottom-back-btn" onclick="switchView('speciesMain')">‹ Takaisin</button>
         </div>
 
         <!-- Feed-näkymä (Vain paino ja pituus) -->
         <div id="feedView" class="view-section">
-            <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 15px;">
-                <div style="width: 50px;"></div>
-                <h2 style="color: #0f4c81; font-size: 16px; margin: 0;">📰 Yhteisön Feed</h2>
-                <div style="width: 50px;"></div>
+            <div class="view-header-container">
+                <button class="top-back-btn" onclick="switchView('map')">‹ Takaisin</button>
+                <h2>📰 Yhteisön Feed</h2>
+                <div style="width: 70px;"></div>
             </div>
             <div id="feedList">
                 <p style="color: #6b7280; font-size: 13px;">Ladataan feediä...</p>
             </div>
-            <button class="bottom-back-btn" onclick="switchView('map')">‹ Takaisin</button>
         </div>
 
         <!-- Profiilinäkymä -->
         <div id="profileView" class="view-section">
-            <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 15px;">
-                <div style="width: 50px;"></div>
-                <h2 style="color: #0f4c81; font-size: 16px; margin: 0;">👤 Oma Profiili</h2>
-                <div style="width: 50px;"></div>
+            <div class="view-header-container">
+                <button class="top-back-btn" onclick="switchView('map')">‹ Takaisin</button>
+                <h2>👤 Oma Profiili</h2>
+                <div style="width: 70px;"></div>
             </div>
             <p style="font-size: 13px; color: #334155;">Käyttäjä: Pasi</p>
             <p style="font-size: 13px; color: #334155; margin-top: 6px;">Tietokantayhteys: Supabase (Aktiivinen)</p>
-            <button class="bottom-back-btn" onclick="switchView('map')">‹ Takaisin</button>
         </div>
 
         <!-- Sääpalkki -->
@@ -815,7 +823,7 @@
         }
 
         async function openLogbookSpecies(speciesName) {
-            document.getElementById('logbookSpeciesTitle').innerText = `📖 ${speciesName} - Lokikirja`;
+            document.getElementById('logbookSpeciesTitle').innerText = `${speciesName} - Lokikirja`;
             switchView('logbookSpecies');
             
             const container = document.getElementById('logbookSpeciesList');
@@ -921,7 +929,7 @@
         }
 
         function openSpeciesDataView(speciesName) {
-            document.getElementById('speciesDetailTitle').innerText = `🐟 ${speciesName} - Reaaliaikaiset Täsmätiedot`;
+            document.getElementById('speciesDetailTitle').innerText = `${speciesName} - Täsmätiedot`;
             switchView('speciesDetail');
             
             const body = document.getElementById('speciesDetailBody');
@@ -933,41 +941,63 @@
 
             const isCloudyOrRaining = currentWeatherDataCode >= 1;
             const windText = currentWindSpeed > 4 ? "tuulinen" : "tyyni";
+            const currentMonth = new Date().getMonth() + 1; // 1-12
 
             let realTimeAdvice = "";
             let recommendedLures = "";
             let recommendedColors = "";
             let depthAdvice = "";
+            let monthlyGuide = "";
 
             if (speciesName === 'Hauki') {
                 if (pressureState === "matalapaine" || isCloudyOrRaining) {
-                    realTimeAdvice = "Matalapaine / pilvinen sää: Hauki on aktiivisella tuulella ja saalistaa aktiivisesti matalikoilla ja kaislikoiden reunoilla. Nyt kannattaa hyödyntää aktiivista uittoa.";
-                    recommendedLures = "Isot kumikalat (15-25 cm) raskaammilla jigipäillä, liukuvat jerkkivieheet (glider) tai leveäpotkuiset lusikkauistimet.";
-                    recommendedColors = "Luonnonvärit (ahven, särki) kirkkaaseen vettiin; sameaan tai sateiseen säähän räikeät Firetiger, flash ja fluorikeltainen.";
-                    depthAdvice = "Syvyysalue: 1.0 – 3.5 metriä (kaislikon reunat, tuulenpuoleiset penkat).";
+                    realTimeAdvice = "Matalapaine / pilvinen sää: Hauki on erittäin aktiivisella tuulella ja saalistaa aktiivisesti matalikoilla, kaislikoiden reunoilla sekä virtaavissa salmissa. Nyt kannattaa hyödyntää rivakampaa uittoa.";
+                    recommendedLures = "Isot kumikalat (15-25 cm) raskaammilla jigipäillä, liukuvat jerkkivieheet (glider), spinnerbaitit tai leveäpotkuiset lusikkauistimet.";
+                    recommendedColors = "Luonnonvärit (ahven, särki) kirkkaaseen veteen; sameaan tai sateiseen säähän räikeät Firetiger, flash, oranssi ja fluorikeltainen.";
+                    depthAdvice = "Syvyysalue: 1.0 – 3.5 metriä (kaislikon reunat, tuulenpuoleiset penkat ja matalikot).";
                 } else if (pressureState === "korkeapaine") {
-                    realTimeAdvice = "Korkeapaine / aurinkoinen sää: Hauki on passiivisempi ja saattaa maata syvemmällä pohjan läheisyydessä. Vaatii hitaampaa uittoa ja pitkiä pysähdyksiä.";
-                    recommendedLures = "Hitaasti uivat swimbaitit, suspetti-vaaput pitkillä tauoilla tai hitaasti kelatut spinnerbaitit.";
-                    recommendedColors = "Himmeät ja luonnonmukaiset sävyt: hopea, helmiäinen ja hauen oma luonnonväri.";
-                    depthAdvice = "Syvyysalue: 3.0 – 6.0 metriä (syvemmät penkat ja karikoiden reunat).";
+                    realTimeAdvice = "Korkeapaine / aurinkoinen sää: Hauki on passiivisempi ja saattaa maata syvemmällä pohjan läheisyydessä tai kivikoiden suojissa. Vaatii hidasta uittoa ja pitkiä taukoja.";
+                    recommendedLures = "Hitaasti uivat swimbaitit, suspetti-vaaput pitkillä uiton pysähdyksillä tai hitaasti kelatut lusikat.";
+                    recommendedColors = "Himmeät ja luonnonmukaiset sävyt: hopea, helmiäinen, hauen oma luonnonväri ja tumma ruskea.";
+                    depthAdvice = "Syvyysalue: 3.0 – 6.0 metriä (syvemmät penkat, kaislikon ulkoreunat ja karikoiden reunat).";
                 } else {
-                    realTimeAdvice = "Normaali paine: Perustilanne. Hauki liikkuu aktiivisesti tuulenpuoleisilla rannoilla ja virtapaikoissa.";
+                    realTimeAdvice = "Normaali paine: Perustilanne. Hauki liikkuu aktiivisesti tuulenpuoleisilla rannoilla, salmissa ja niemenkärissä.";
                     recommendedLures = "Perinteiset jerkkivieheet, pyrstökumit ja lusikat.";
                     recommendedColors = "Muikku, ahven ja perus kontrastivärit.";
                     depthAdvice = "Syvyysalue: 2.0 – 4.0 metriä.";
                 }
+
+                if (currentMonth >= 5 && currentMonth <= 6) {
+                    monthlyGuide = "Kevät (touko-kesäkuu): Kudun jälkeinen tankkausaika. Hauet löytyvät matalista lahdista, kaislikoiden reunoilta ja kutulahtien edustoilta. Agility on korkealla.";
+                } else if (currentMonth >= 7 && currentMonth <= 8) {
+                    monthlyGuide = "Kesä (heinä-elokuu): Lämpimän veden aikaan hauet hakeutuvat syvempien penkkojen reunoille, tuulen alle ja virtaaviin kapeikkoihin, joissa happipitoisuus on korkeampi.";
+                } else if (currentMonth >= 9 && currentMonth <= 11) {
+                    monthlyGuide = "Syksy (syys-marraskuu): Parasta suurhauen kalastusaikaa. Hauet siirtyvät syvemmille selkävesille ja syvänteiden reunoille tankkaamaan talvea varten isoilla vieheillä.";
+                } else {
+                    monthlyGuide = "Talvi / Muu aika: Paikallishauet tavoitettavissa matalikoiden ja salmien tuntumasta rauhallisella uitolla.";
+                }
+
             } else if (speciesName === 'Kuha') {
                 if (isCloudyOrRaining || windText === "tuulinen") {
-                    realTimeAdvice = "Pilvinen/tuulinen sää: Kuhan syönti-ikkuna on laajentunut, eikä se arastele pinnan läheisyyttä. Nousee aktiivisesti ruokailmalle penkoille.";
-                    recommendedLures = "Heittojigit (kourupyrstöt, toukat) ja kevyet pystyjigit.";
-                    recommendedColors = "Chartreuse, helmiäisvalkoinen, oranssi ja UV-aktiiviset sävyt.";
+                    realTimeAdvice = "Pilvinen/tuulinen sää: Kuhan syönti-ikkuna on laajentunut, eikä se arastele pinnan läheisyyttä. Nousee aktiivisesti ruokailmalle penkoille ja karikoille.";
+                    recommendedLures = "Heittojigit (kourupyrstöt, toukat, action-shads) ja kevyet vertikaalijigit.";
+                    recommendedColors = "Chartreuse (kellertävänvihreä), helmiäisvalkoinen, oranssi ja UV-aktiiviset sävyt.";
                     depthAdvice = "Syvyysalue: 3.0 – 7.0 metriä (penkat ja karikoiden reuna-alueet).";
                 } else {
-                    realTimeAdvice = "Aurinkoinen/tyyni sää: Kuha painuu syvemmälle ja odottaa hämärämpää. Vaatii tarkkaa pohjan tuntumaa ja jigin uittoa suoraan parven kylkeen.";
+                    realTimeAdvice = "Aurinkoinen/tyyni sää: Kuha painuu syvemmälle ja odottaa hämärämpää. Vaatii tarkkaa pohjan tuntumaa ja jigin uittoa suoraan parven kylkeen tai syvänteisiin.";
                     recommendedLures = "Drop-shot rigit, raskaammat jigit pohjasta uitettuna tai syvännevaaput.";
                     recommendedColors = "Moottoriöljy (motoroil), tumma violetti ja luonnonmukainen kuha-/särkiväri.";
                     depthAdvice = "Syvyysalue: 6.0 – 12.0 metriä (syvänteet, montut ja selkäkarikot).";
                 }
+
+                if (currentMonth >= 6 && currentMonth <= 8) {
+                    monthlyGuide = "Kesäaika: Kuha viihtyy selkävesien patilla, penkkojen reunoilla ja syvillä alueilla. Parhaita aikoja ovat aamuhämärä ja myöhäinen ilta.";
+                } else if (currentMonth >= 9 && currentMonth <= 10) {
+                    monthlyGuide = "Syysaika: Vahva syöntipiikki selkävesien reunoilla. Parvet liikuttavat aktiivisesti muikkuparvien perässä syvemmissä vesissä.";
+                } else {
+                    monthlyGuide = "Muut vuodenajat: Tarkkaile kaikuluotaimella pohjan tuntumassa makaavia parvia.";
+                }
+
             } else if (speciesName === 'Ahven') {
                 if (pressureState === "matalapaine") {
                     realTimeAdvice = "Matalapaine: Ahvenparvet ovat aktiivisia välivedessä ja kivikoiden reunnoilla. Nopea reagointi tuo hyvän saaliin.";
@@ -975,10 +1005,16 @@
                     recommendedColors = "Kirkkaat värilliset pyrstöt, punainen, muikku ja keltainen.";
                     depthAdvice = "Syvyysalue: 1.5 – 4.0 metriä.";
                 } else {
-                    realTimeAdvice = "Vakaa / korkea paine: Ahven puree herkemmin pohjan läheisyydestä karikoilta ja salmista. Vaatii hienovaraista esitystä.";
-                    recommendedLures = "Carolina-rig, drop-shot tai pienet kevyet jigit.";
+                    realTimeAdvice = "Vakaa / korkea paine: Ahven puree herkemmin pohjan läheisyydestä karikoilta, vedenalaisilta kynnöksiltä ja salmista. Vaatii hienovaraista esitystä.";
+                    recommendedLures = "Carolina-rig, drop-shot tai pienet kevyet jigit elävävällä pyrstöllä.";
                     recommendedColors = "Moottoriöljy, luonnonmukainen pikkukala ja ruskean sävyt.";
                     depthAdvice = "Syvyysalue: 3.0 – 7.0 metriä.";
+                }
+
+                if (currentMonth >= 6 && currentMonth <= 9) {
+                    monthlyGuide = "Kesä/Syksy: Ahvenet muodostavat suuria parvia kivikoiden ja karikoiden ympärille. Parhaita ottipaikkoja ovat virtaavat salmet ja matalikoiden reunat.";
+                } else {
+                    monthlyGuide = "Kevät/Talvi: Ahven hakeutuu matalampiin lahtiin kudun lähestyessä ja aktivoituu aurinkoisina kevätpäivinä.";
                 }
             }
 
@@ -991,6 +1027,10 @@
                     <p>${realTimeAdvice}</p>
                 </div>
                 <div class="detail-card">
+                    <h4>📅 Kuukausikohtainen opas</h4>
+                    <p>${monthlyGuide}</p>
+                </div>
+                <div class="detail-card">
                     <h4>🎣 Suositellut vieheet</h4>
                     <p>${recommendedLures}</p>
                 </div>
@@ -999,7 +1039,7 @@
                     <p>${recommendedColors}</p>
                 </div>
                 <div class="detail-card">
-                    <h4>📍 Optimaalinen syvyys</h4>
+                    <h4>📍 Optimaalinen syvyys ja paikka</h4>
                     <p>${depthAdvice}</p>
                 </div>
             `;
