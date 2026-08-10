@@ -350,7 +350,7 @@
 
             <!-- Salasana-kenttä -->
             <div class="form-group">
-                <label>Sovelluksen salasana (tarkistetaan palvelimella):</label>
+                <label>Sovelluksen salasana:</label>
                 <input type="password" id="catchPassword" placeholder="Syötä salasana">
             </div>
 
@@ -567,8 +567,9 @@
         const dateStr = now.toLocaleDateString('fi-FI');
         const timeStr = now.toLocaleTimeString('fi-FI', { hour: '2-digit', minute: '2-digit' });
 
-        document.getElementById("coordStatus").innerText = "☁️ Lähetetään tiedot ja tarkistetaan salasana...";
+        document.getElementById("coordStatus").innerText = "☁️ Tallennetaan saalista...";
 
+        // Lähetetään taustalla Driveen (no-cors)
         try {
             const payload = {
                 password: passwordInput,
@@ -581,12 +582,12 @@
                 depth: depth,
                 lure: lure
             };
-            await fetch(APP_CONFIG.DRIVE_WEB_APP_URL, {
+            fetch(APP_CONFIG.DRIVE_WEB_APP_URL, {
                 method: "POST",
                 mode: "no-cors",
                 headers: { "Content-Type": "text/plain;charset=utf-8" },
                 body: JSON.stringify(payload)
-            });
+            }).catch(err => console.error("Drive lähetysvirhe:", err));
         } catch (err) {
             console.error("Virhe Driven siirrossa:", err);
         }
@@ -620,7 +621,7 @@
         document.getElementById("catchPassword").value = "";
         document.getElementById("preview-img").style.display = "none";
         tempImageBase64 = "";
-        document.getElementById("coordStatus").innerText = "✓ Saalis tallennettu paikallisesti ja lähetetty Driveen!";
+        document.getElementById("coordStatus").innerText = "✓ Saalis tallennettu onnistuneesti!";
 
         loadCatchesFromStorage();
         loadCommunityCatches();
@@ -1022,7 +1023,7 @@
                 actionText = "Isot haukikumit, spinnerbaitit ja syvännevaaput.";
                 colorText = "Harmaa, ahvenjäljitelmä, luonnonhauki ja hopea.";
             } else if (month >= 9 && month <= 11) {
-                seasonText = "Syyskausi (Syys-marraskuu): Syyshauki on parhaimmillaan! Kalat tankkaavat aggressiivisesti matalissa ja kaislikoiden reunoilla ennen talvea.";
+                seasonText = "Syyskausi (Syys-marraskuu): Syyshauki parhaimmillaan! Kalat tankkaavat aggressiivisesti matalissa ja kaislikoiden reunoilla ennen talvea.";
                 locText = "Kaislikoiden reunat, salakat ja matalat lahdentulot (1.5 – 3.5 m).";
                 actionText = "Isot haukikumit, jerkit ja pitkät liukumat.";
                 colorText = "Luonnonvärit, muikku, oranssi ja kulta.";
